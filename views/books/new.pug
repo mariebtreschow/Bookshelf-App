@@ -1,0 +1,23 @@
+extends ../application.pug
+
+block content
+   .container
+      .row
+         .col-xs-8.offset-xs-2
+            h1 Create a New Book here:
+            hr
+            form
+               div(class="form-group")
+                  lable Title
+                  input(type="text" class="form-control")
+               div(class="form-group")
+                  lable Cover Image URL
+                  input(type="text" class="form-control")
+               div(class="form-group")
+                  lable Author
+                  input(type="text" class="form-control")
+               div(class="form-group")
+                  lable Description
+                  textarea(class="form-control" rows=6)
+               div(class="form-group text-xs-center")
+                  button(type="submit" class="btn btn-ls btn-success") Create a New Book

@@ -2,11 +2,14 @@ const morgan = require('morgan'),
       pug = require('pug'),
       express = require('express'),
       bodyParser = require('body-parser'),
+      methodOverride = require('method-override'),
       Sequelize = require('sequelize');
 
 
 var app = express(),
     sequelize = new Sequelize('marietreschow', 'marietreschow', 'asta', { dialect: 'postgres' });
+
+var booksRouter = require('./routes/books');
 
 var Book = sequelize.define('book', {
    title: Sequelize.STRING,
@@ -19,33 +22,23 @@ app.use(express.static('public'));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false}));
 
+
+app.use(methodOverride((req, res) => {
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+    var method = req.body._method;
+    delete req.body._method;
+    return method;
+  }})
+);
+
 app.set('view engine', 'pug');
 
 app.get('/', (req, res) => {
    res.redirect('/books');
 });
 
-app.get('/books', (req, res) => {
-   Book.findAll().then((books) => {
-      res.render('books/index', { books: books });
-   });
-});
+app.use('/books', booksRouter);
 
-app.post('/books', (req, res) => {
-   Book.create(req.body).then(() => {
-      res.redirect('/books');
-   });
-});
-
-app.get('/books/new', (req, res) => {
-   res.render('books/new');
-});
-
-app.get('books/:id/edit', (req, res) => {
-   Book.findById(req.params.id).then((book) => {
-      res.render('books/edit', { book: book });
-   });
-});
 
 sequelize.sync().then(() => {
    console.log('Connected to database');

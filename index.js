@@ -7,7 +7,7 @@ const morgan = require('morgan'),
 
 
 var app = express(),
-    sequelize = new Sequelize('marietreschow', 'marietreschow', 'asta', { dialect: 'postgres' });
+    sequelize = new Sequelize('marietreschow', 'marietreschow', '', { dialect: 'postgres' });
 
 var booksRouter = require('./routes/books');
 

@@ -1,4 +1,22 @@
 extends ../application.pug
 
 block content
-  h2 Listing Books:
+	.container
+		.row
+			.col-xs-8
+				br
+				h2 Listing Books:
+				hr
+				each book in books
+					.card.card-block
+						.rox
+							.col-xs-4
+								img(src=book.imageURL alt=book.title + 'Cover Image' class="image-fluid")
+							.col-xs-8
+								h2= book.title
+								h4= book.author
+								p= book.description
+								.text-xs-right
+									a(href="/books/" + book.id + "/edit")
+									form(action="/books/" + book.id method="DELETE")
+										button(type="submit" href="" class="btn btn-danger ny-book-delete-button" data-book=book.id) Delete Book

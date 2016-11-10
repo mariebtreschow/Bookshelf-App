@@ -1,0 +1,23 @@
+extends ../application.pug
+
+block content
+   .container
+      .row
+         .col-xs-8.offset-xs-2
+            h1 Edit a Book:
+            hr
+            form(action="/books/" + book.id method="PUT")
+               div(class="form-group")
+                  lable(for="book-title") Title
+                  input(name="title" type="text" class="form-control" id="book-title" value=book.title)
+               div(class="form-group")
+                  lable(for="book-cover-image") Cover Image URL
+                  input(name="imageURL" type="text" class="form-control" id="book-cover-image" value=book.imageURL)
+               div(class="form-group")
+                  lable(for="book-author") Author
+                  input(name="author" type="text" class="form-control" id="book-author" value=book.author)
+               div(class="form-group")
+                  lable(for="book-description") Description
+                  textarea(name="description" class="form-control" rows=6 id="books-description" value=book.description)
+               div(class="form-group text-xs-center")
+                  button(type="submit" class="btn btn-ls btn-success") Sumbit Change

@@ -59,6 +59,18 @@ router.put('/:id', (req, res) => {
    });
 });
 
+router.delete('/:id', (req, res) => {
+   Book.destroy({
+      where: {
+         id: req.params.id
+      }
+   }).then(() => {
+      res.redirect('/books');
+   }).catch((error) => {
+      console.log('Error is:');
+      console.log(error);
+   });
+});
 
 
 module.exports = router;

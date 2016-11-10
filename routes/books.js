@@ -1,7 +1,7 @@
 const express = require('express'),
       Sequelize = require('sequelize'),
       router = express.Router(),
-      sequelize = new Sequelize('marietreschow', 'marietreschow', 'asta', { dialect: 'postgres' });
+      sequelize = new Sequelize('marietreschow', 'marietreschow', '', { dialect: 'postgres' });
 
 var Book = sequelize.define('book', {
    title: Sequelize.STRING,
